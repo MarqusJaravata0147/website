@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { collection, onSnapshot, query, where, orderBy } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
+import ListingCard from '@/components/ListingCard';
 
 interface Listing {
   id: string;
@@ -69,19 +70,16 @@ export default function ListingsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {filtered.map(listing => (
-            <div key={listing.id} className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition">
-              <img
-                src={listing.images?.[0] || '/placeholder.jpg'}
-                alt={listing.title}
-                className="w-full h-48 object-cover"
-              />
-              <div className="p-4">
-                <h2 className="text-lg font-semibold truncate">{listing.title}</h2>
-                <p className="text-sm text-gray-600">{listing.category} • {listing.condition}</p>
-                <p className="text-blue-600 font-bold mt-2">${listing.price}</p>
-              </div>
-            </div>
-          ))}
+  <ListingCard
+    key={listing.id}
+    id={listing.id}
+    title={listing.title}
+    price={listing.price}
+    image={listing.images?.[0]}
+    category={listing.category}
+    condition={listing.condition}
+  />
+))}
         </div>
       )}
     </div>
