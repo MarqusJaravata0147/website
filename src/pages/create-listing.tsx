@@ -18,7 +18,7 @@ const conditions = [
   "New", "Used - Like New", "Used - Good", "Used - Fair"
 ];
 
-export default function CreateListing() {
+function CreateListing() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -128,3 +128,5 @@ export default function CreateListing() {
     </div>
   );
 }
+import withAuth from '@/lib/withAuth';
+export default withAuth(CreateListing);
